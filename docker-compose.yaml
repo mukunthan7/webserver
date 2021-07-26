@@ -1,0 +1,25 @@
+version: "3.4"
+   
+services: 
+    webserver:
+        image: nginx:latest
+        restart: always
+        ports: 
+            - "8000:80"
+        volumes: 
+            - ~/MK420:/usr/share/nginx/html
+        depends_on: 
+            - db
+        links: 
+            - db
+
+db:
+    image: mysql:latest
+    environment: 
+        - MYSQL_ROOT_PASSWORD="your password"
+    restart: always
+    volumes: 
+        - db_vol:/var/lib/mysql
+
+volumes: 
+    db_vol:
